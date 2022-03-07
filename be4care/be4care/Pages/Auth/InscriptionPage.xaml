@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="be4care.Pages.InscriptionPage"
+             xmlns:local="clr-namespace:be4care"
+             xmlns:xfg="clr-namespace:XFGloss;assembly=XFGloss"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             CompressedLayout.IsHeadless="True"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             >
+    
+    <xfg:ContentPageGloss.BackgroundGradient>
+        <xfg:Gradient Rotation="45">
+            <xfg:GradientStep StepColor="#FF5955" StepPercentage="0" />
+            <xfg:GradientStep StepColor="#FF9C6C" StepPercentage=".5" />
+            <xfg:GradientStep StepColor="#FFCB7E" StepPercentage="1" />
+        </xfg:Gradient>
+    </xfg:ContentPageGloss.BackgroundGradient>
+
+    <Grid Padding="10,30,10,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" CompressedLayout.IsHeadless="True" BackgroundColor="#fafafa" >
+            <ffimageloading:CachedImage Source="back.png"  VerticalOptions="Center" HorizontalOptions="Start" >
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  NumberOfTapsRequired="1" Command="{Binding  backClick}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <Label Text="RETOUR "  HorizontalOptions="StartAndExpand" TextColor="White" FontSize="13" VerticalOptions="Center" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer  NumberOfTapsRequired="1" Command="{Binding  backClick}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        
+        <ScrollView Grid.Row="1" Padding="0,0,0,15" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+
+            <StackLayout   x:Name="inscriptonLayout" VerticalOptions="FillAndExpand"  >
+                <StackLayout  Orientation="Vertical" VerticalOptions="EndAndExpand"  HorizontalOptions="FillAndExpand" >
+                    <Label Text="Inscription" TextColor="White" FontSize="44" FontAttributes="Bold"  HorizontalOptions="CenterAndExpand" Margin="10"/>
+                    <StackLayout VerticalOptions="Center" Padding="0,20,0,0">
+                    <local:myEntry Placeholder="  Email" PlaceholderColor="White" FontSize="20" HorizontalOptions="Fill" Margin="5" HeightRequest="40" Text="{Binding email, Mode=TwoWay}" Keyboard="Email" />
+                    <local:myEntry Placeholder="  Numéro de téléphone" PlaceholderColor="White" FontSize="20"  HorizontalOptions="Fill" Margin="5" HeightRequest="40" Text="{Binding  num , Mode=TwoWay}"  Keyboard="Telephone" />
+                    <local:myEntry Placeholder="  Mot de passe" PlaceholderColor="White" FontSize="20" HorizontalOptions="Fill" Margin="5" HeightRequest="40"  IsPassword="True" Text="{Binding password , Mode=OneWayToSource}"  />
+                    <local:myEntry  Placeholder="  Mot de passe" PlaceholderColor="White" FontSize="20" HorizontalOptions="Fill" Margin="5" HeightRequest="40"  IsPassword="True" Text="{Binding passverif , Mode=OneWayToSource}"  />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Fill" x:Name="buttonStack" VerticalOptions="FillAndExpand" >
+                    <StackLayout Orientation="Horizontal" Padding="20,10,20,10" HorizontalOptions="Fill" >
+                        <ctrls:CheckBox HorizontalOptions="Start"
+                Grid.Column="1"
+                ShowLabel="False"
+                Checked="{Binding acceptTerms}"
+                Size="25"
+                OnImg="Image_Checked"
+                OffImg="Image_Unchecked"
+                />
+                        <Label Text="J'accepte les conditions d'utilisatios " TextColor="White"  HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"  >
+                        <ActivityIndicator
+                        AbsoluteLayout.LayoutBounds="0,0.5,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        IsEnabled="{Binding isBusy,Mode=OneWay}"
+                        IsRunning="{Binding isBusy,Mode=OneWay}"
+                        IsVisible="{Binding isBusy,Mode=OneWay}"
+                        Color="White"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        ></ActivityIndicator>
+                        <Button AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  IsVisible="{Binding  isEnabled , Mode=OneWay}" CornerRadius="20" BackgroundColor="White" Text="Valider" TextColor="#FF9C6C" HorizontalOptions="Fill" Margin="5" Command="{Binding validate}"/>
+                    </AbsoluteLayout>
+                </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

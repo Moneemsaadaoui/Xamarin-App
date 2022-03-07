@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             CompressedLayout.IsHeadless="True"
+             xmlns:local="clr-namespace:be4care"
+             x:Class="be4care.Pages.AddDocPage">
+    <ContentPage.Content>
+        <Grid Padding="0,30,0,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+                <Label Text="Mes Documents" FontSize="36" TextColor="Black" HorizontalOptions="Start" VerticalOptions="StartAndExpand"/>
+            </StackLayout>
+            <ScrollView Grid.Row="1" BackgroundColor="#f5f5f5" >
+                <StackLayout Padding="20,0,20,20" VerticalOptions="CenterAndExpand" >
+                <StackLayout  CompressedLayout.IsHeadless="True">
+                <Label Text="Bienvenue" HorizontalOptions="Center" VerticalOptions="Center" FontSize="50" TextColor="Black"/>
+                <Label Text="dans be4care" HorizontalOptions="Center" VerticalOptions="Center" FontSize="44" TextColor="Black" />
+                </StackLayout>
+                    <AbsoluteLayout   HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="50" >
+                        <ActivityIndicator
+                    AbsoluteLayout.LayoutBounds="0,0.5,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsEnabled="{Binding isBusy,Mode=OneWay}"
+                    IsRunning="{Binding isBusy,Mode=OneWay}"
+                    IsVisible="{Binding isBusy,Mode=OneWay}"
+                    Color="Orange"
+                    HeightRequest="70"
+                    WidthRequest="70"
+                    ></ActivityIndicator>
+                        <Frame  
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                            IsClippedToBounds="False"
+                            CornerRadius="10"
+                            Padding="0"
+                            IsVisible = "{Binding  isEnabled , Mode=OneWay}"
+                            HorizontalOptions="Fill">
+                            <local:GradientButton  StartColor="#FF5955" EndColor="#FFCB7E" HorizontalOptions="Fill" VerticalOptions="Fill" IsClippedToBounds="True">
+                                <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Text="Ajouter un document" TextColor="White" FontSize="20" Command="{Binding addDoc}" />
+                            </local:GradientButton>
+                        </Frame>
+                    </AbsoluteLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

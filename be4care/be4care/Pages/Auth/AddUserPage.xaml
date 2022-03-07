@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xfg="clr-namespace:XFGloss;assembly=XFGloss"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:local="clr-namespace:be4care"
+             CompressedLayout.IsHeadless="True"
+             x:Class="be4care.Pages.AddUserPage">
+    
+    <xfg:ContentPageGloss.BackgroundGradient>
+        <xfg:Gradient Rotation="45">
+            <xfg:GradientStep StepColor="#FF5955" StepPercentage="0" />
+            <xfg:GradientStep StepColor="#FF9C6C" StepPercentage=".5" />
+            <xfg:GradientStep StepColor="#FFCB7E" StepPercentage="1" />
+        </xfg:Gradient>
+    </xfg:ContentPageGloss.BackgroundGradient>
+
+    <Grid Padding="10,30,10,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Text="IGNORER X " Grid.Row="0" HorizontalOptions="StartAndExpand" TextColor="White" FontSize="13" VerticalOptions="Center"  >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer  NumberOfTapsRequired="1" Command="{Binding  close}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <ScrollView Grid.Row="1" Padding="0,0,0,15" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+
+            <StackLayout  x:Name="adduserStack" Orientation="Vertical" VerticalOptions="FillAndExpand" >
+                <StackLayout >
+                <Label Text="Saisir vos données" TextColor="White" FontSize="44" FontAttributes="Bold"  HorizontalOptions="CenterAndExpand" Margin="10" />
+                <local:myEntry Placeholder="  username" PlaceholderColor="White" FontSize="15" HorizontalOptions="Fill" Margin="5" HeightRequest="40" Text="{Binding username, Mode=TwoWay}" Keyboard="Text"  />
+                <local:myEntry Placeholder="  Nom" PlaceholderColor="White" FontSize="15" HorizontalOptions="Fill" Margin="5" HeightRequest="40" Text="{Binding nom, Mode=TwoWay}" Keyboard="Text" />
+                <local:myEntry Placeholder="  Prénon" PlaceholderColor="White" FontSize="15" HorizontalOptions="Fill" Margin="5" HeightRequest="40" Text="{Binding prenom, Mode=TwoWay}" Keyboard="Text" />
+                </StackLayout>
+                <StackLayout x:Name="buttonStack" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" >
+                        <StackLayout Padding="10">
+                            <Label Text="Date de naissance : " TextColor="White" FontSize="15" Margin="5" HorizontalOptions="Start"  />
+                            <Label Text="Sexe : " TextColor="White" FontSize="15" Margin="5" HorizontalOptions="Start"  />
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand"  x:Name="dateStack">
+                            <DatePicker Date="{Binding date,Mode=TwoWay}" TextColor="White"  BackgroundColor="Transparent"  HorizontalOptions="StartAndExpand" />
+                            <Picker   
+                            ItemsSource="{Binding Data}"
+                            SelectedItem="{Binding sex,Mode=TwoWay}"
+                            TextColor="White"
+                            HorizontalOptions="StartAndExpand"
+                            BackgroundColor="Transparent"      
+                        />
+                        </StackLayout>
+                    </StackLayout >
+                    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"   >
+                            <ActivityIndicator
+                        AbsoluteLayout.LayoutBounds="0,0.5,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        IsEnabled="{Binding isBusy,Mode=OneWay}"
+                        IsRunning="{Binding isBusy,Mode=OneWay}"
+                        IsVisible="{Binding isBusy,Mode=OneWay}"
+                        Color="White"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        ></ActivityIndicator>
+                            <Button AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding  isEnabled , Mode=OneWay}" CornerRadius="20" BackgroundColor="White" Text="Valider" TextColor="#FF9C6C" HorizontalOptions="Fill" Margin="5" Command="{Binding validate}"/>
+                        </AbsoluteLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

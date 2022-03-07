@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:local="clr-namespace:be4care"
+             CompressedLayout.IsHeadless="True"
+             x:Class="be4care.Pages.AddHstructPage">
+    <Grid Padding="10,30,10,10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" CompressedLayout.IsHeadless="True" BackgroundColor="#fafafa" >
+            <ffimageloading:CachedImage Source="back.png"  VerticalOptions="Center" HorizontalOptions="Start" >
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  NumberOfTapsRequired="1" Command="{Binding  backClick}" />
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <Label Text="RETOUR "  HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="13" VerticalOptions="Center" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer  NumberOfTapsRequired="1" Command="{Binding  backClick}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        
+        <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="Start" CompressedLayout.IsHeadless="True">
+            <Label Text="Ajouter Structure de Santé" FontSize="36" TextColor="Black" HorizontalOptions="Start" VerticalOptions="StartAndExpand"/>
+        </StackLayout>
+
+        <ScrollView  Grid.Row="2"  VerticalOptions="FillAndExpand" >
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,10,0,10" CompressedLayout.IsHeadless="True">
+                <Label Text="Nom" FontSize="12" TextColor="Black" />
+                <Entry Text="{Binding fullName,Mode=TwoWay}" FontSize="20" HorizontalOptions="Fill"  HeightRequest="40" Margin="5"  />
+                <Label Text="Adress" FontSize="12" TextColor="Black" />
+                <Entry Text="{Binding adress,Mode=TwoWay}" FontSize="20" HorizontalOptions="Fill" HeightRequest="40" Margin="5"  />
+                <Label Text="Numero de Telephone" FontSize="12" TextColor="Black" />
+                <Entry Text="{Binding phNumber,Mode=TwoWay}" FontSize="20" HorizontalOptions="Fill" HeightRequest="40" Margin="5" Keyboard="Telephone"  />
+                <Label Text="Email" FontSize="12" TextColor="Black" />
+                <Entry Text="{Binding email,Mode=TwoWay}" FontSize="20" HorizontalOptions="Fill" HeightRequest="40" Margin="5" Keyboard="Email"  />
+                <Grid HorizontalOptions="Fill" >
+                    <Label Grid.Row="0" Grid.Column="0" Text="Favouris?" />
+                    <ctrls:CheckBox HorizontalOptions="Start"
+                            Grid.Column="1" 
+                            Grid.Row="0"
+                            ShowLabel="False"
+                            Checked="{Binding star,Mode=TwoWay}"
+                            Size="30"
+                            OnImg="star.png"       
+                            OffImg="unstar.png"
+                        />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+
+        <AbsoluteLayout Grid.Row="3" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"   >
+            <ActivityIndicator
+                        AbsoluteLayout.LayoutBounds="0,0.5,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        IsEnabled="{Binding isBusy,Mode=OneWay}"
+                        IsRunning="{Binding isBusy,Mode=OneWay}"
+                        IsVisible="{Binding isBusy,Mode=OneWay}"
+                        Color="Orange"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        ></ActivityIndicator>
+            <Frame
+                    AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                    IsClippedToBounds="False"
+                    CornerRadius="10"
+                    Padding="0"
+                    IsVisible = "{Binding  isEnabled , Mode=OneWay}"
+                    HorizontalOptions="Fill">
+                <local:GradientButton  StartColor="#FF5955" EndColor="#FFCB7E" HorizontalOptions="Fill" VerticalOptions="Fill" IsClippedToBounds="True">
+                    <Button HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Text="valider" TextColor="White" FontSize="20" Command="{Binding save}" />
+                </local:GradientButton>
+            </Frame>
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>
